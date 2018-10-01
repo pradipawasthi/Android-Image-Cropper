@@ -5,44 +5,34 @@ apply plugin: 'maven-publish'
 
 android {
 
-    compileSdkVersion rootProject.compileSdkVersion
-    buildToolsVersion rootProject.buildToolsVersion
+    compileSdkVersion 28
+    buildToolsVersion '28.0.2'
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion rootProject.compileSdkVersion
-        versionCode 1
-        versionName PUBLISH_VERSION
+
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 48
+        versionName "4.2.13"
+        multiDexEnabled true
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
-    }
-    lintOptions {
-        abortOnError false
-    }
+
 }
 
 // This configuration is used to publish the library to a local repo while a being forked and modified.
 // It should really be set up so that the version are all in line, and set to be a SNAPSHOT.
 // The version listed here is a temp hack to allow me to keep working.
 android.libraryVariants
-publishing {
-    publications {
-        maven(MavenPublication) {
 
-            groupId PUBLISH_GROUP_ID
-            artifactId PUBLISH_ARTIFACT_ID
-            version PUBLISH_VERSION + '-SNAPSHOT'
 
-            //artifact bundleRelease
-        }
-    }
-}
-
-apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
 
 dependencies {
-    api "com.android.support:appcompat-v7:$supportLibraryVersion"
-    implementation "com.android.support:exifinterface:$supportLibraryVersion"
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation("com.android.support:exifinterface:26.0.1") {
+        transitive = false
+    }
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+
+
 }
 
